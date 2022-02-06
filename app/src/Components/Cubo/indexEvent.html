@@ -1,0 +1,10 @@
+<script>
+    function send(data) {
+        window.ReactNativeWebView.postMessage(JSON.stringify(data))
+    }
+
+    window.addEventListener("message", function (data) {
+        // send(JSON.parse(data.data))
+        
+    });
+</script>

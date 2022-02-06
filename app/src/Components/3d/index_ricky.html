@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
+    <title>My first three.js app</title>
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/RGBELoader.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/controls/OrbitControls.js"></script>
+    <!-- <script src="https://raw.githubusercontent.com/mrdoob/three.js/master/examples/js/controls/FirstPersonControls.js"></script> -->
+    <!--<script src="https://82mou.github.io/threejs/js/OrbitControls.js"></script>-->
+
+    <script type="module">
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.outputEnconding = THREE.sRGBEncoding;
+        // renderer.physicallyCorrectLights = true;
+        document.body.appendChild(renderer.domElement);
+        const scene = new THREE.Scene();
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        // camera.position.x = 105.60000000000038;
+        var pos = 20;
+        camera.position.y = -10;
+        camera.position.z = pos;
+        camera.rotation.x = 0.4;
+        // camera.rotation.z = 0.4;
+        // camera.rotation.y = 1.2799999999999736;
+        // camera.rotation.z = 0;
+
+
+        // var mouse = new THREE.Vector2();
+        // var raycaster = new THREE.Raycaster();
+        // raycaster.setFromCamera(mouse, camera);
+
+        const size = 200;
+        const divisions = 200;
+        // const gridHelper = new THREE.GridHelper(size, divisions);
+        // scene.add(gridHelper);
+
+
+        const lightAmbiental = new THREE.AmbientLight(0xffffff, 2.8);
+        scene.add(lightAmbiental);
+
+        addPointLight({ x: -10, y: 10, z: -10, intensity: 0.5, color: 0Xffffff });
+        addPointLight({ x: 0, y: 10, z: -10, intensity: 7, color: 0Xffff00 });
+        addPointLight({ x: 10, y: 10, z: -10, intensity: 7, color: 0Xff00ff });
+        addPointLight({ x: 10, y: -10, z: 10, intensity: 1, color: 0Xffffff });
+        // addPointLight({ x: 0, y: -10, z: 30, intensity: 4, color: 0Xffffff });
+        addPointLight({ x: -10, y: -10, z: 10, intensity: 0.5, color: 0Xff00ff });
+
+
+
+        var loader = new THREE.GLTFLoader();
+        var guitarra;
+        loader.load('../../Assets/3d/hr.gltf', (gltf) => {
+            guitarra = gltf.scene;
+            // guitarra.position.y = 20;
+            // guitarra.rotation.z = 30*Math.PI/180;
+            // guitarra.rotation.x = -10 * Math.PI / 180;
+            // guitarra.rotation.z = -10*Math.PI/180;
+            // guitarra.rotation.y = 20 * Math.PI / 180;
+            // guitarra.castShadow = true; //default is false
+            // guitarra.receiveShadow = false;
+            guitarra.scale.y += 10;
+            guitarra.scale.x += 10;
+            guitarra.scale.z += 10;
+            scene.add(guitarra);
+        });
+
+        new THREE.RGBELoader().load("../../Assets/hdr/3.hdr", function (texture) {
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            scene.background = texture;
+            scene.environment = texture;
+            //  animate()
+        });
+
+        // loader = new THREE.GLTFLoader();
+        // var tablero;
+        // loader.load('../../Assets/3d/tablero.gltf', (gltf) => {
+        //     tablero = gltf.scene;
+        //     // tablero.scale.y += 50;
+        //     tablero.position.y = -15;
+        //     tablero.castShadow = false; //default is false
+        //     tablero.receiveShadow = true;
+        //     // tablero.scale.x += 10;
+        //     // tablero.scale.z += 10;
+        //     // scene.add(tablero);
+        // });
+
+
+        const clock = new THREE.Clock();
+        var delta = 0;
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.addEventListener('change', animate); // use if there is no animation loop
+        controls.minDistance = 20;
+        controls.maxDistance = 100;
+        controls.target.set(0, 0, - 0.2);
+        // controls.staticMoving = true;
+        // controls.panSpeed = 4;
+        controls.update();
+
+
+        function animate() {
+
+            // requestAnimationFrame(animate);
+
+            // raycaster.setFromCamera(mouse, camera);
+            // animCamera();
+            delta = clock.getDelta();
+            // const hasControlsUpdated = controls.update(delta);
+            // if (guitarra) guitarra.rotation.y += 1 * delta;
+            // if (guitarra) guitarra.rotation.x -= 0.001 * clock.getDelta();
+            // if (guitarra) guitarra.rotation.z += 0.2 * clock.getDelta();;
+
+            renderer.render(scene, camera);
+        };
+
+        function addHDR() {
+
+        }
+        function addPointLight({ x, y, z, intensity, color }) {
+            var pointLight = new THREE.PointLight(color);
+            pointLight.position.set(x, y, z); // posición
+            pointLight.intensity = intensity; // intensidad de la luz
+            const pointLightHelper = new THREE.PointLightHelper(pointLight, 1);
+            // scene.add(pointLightHelper);
+            scene.add(pointLight);
+
+        }
+        function animCamera() {
+            if (camera.position.x > 0) {
+                camera.position.x -= 0.5;
+            }
+            if (camera.position.z > 100) {
+                camera.position.z -= 0.5;
+            }
+            if (camera.rotation.y > 0) {
+                camera.rotation.y -= 0.0061;
+            }
+        }
+        // function onMouseMove(event) {
+        //     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        //     mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+        // }
+
+
+        function randomBetween(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1));
+        }
+
+
+        // function onDocumentMouseDown(event) {
+        //     event.preventDefault();
+
+        //     var intersects = raycaster.intersectObjects(scene.children);
+        //     console.log(intersects);
+        //     if (intersects.length > 0) {
+
+        //     }
+        // }
+
+        // document.addEventListener('mousedown', onDocumentMouseDown, false);
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        document.addEventListener('resize', onWindowResize, false);
+        renderer.setAnimationLoop(animate);
+        // animate();
+    </script>
+</body>
+
+</html>

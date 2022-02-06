@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "261961935928",
+    "project_id": "servisofts",
+    "storage_bucket": "servisofts.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261961935928:android:dd6b0ed79e7d7541dbcacd",
+        "android_client_info": {
+          "package_name": "com.sland_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261961935928-lpk68ncvtsb96b3cmdcbgtvpkviu4u45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCduq2CDSHhmR5JZtU8BKo_773Y6naOA2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261961935928-lpk68ncvtsb96b3cmdcbgtvpkviu4u45.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

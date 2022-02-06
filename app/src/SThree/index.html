@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>My first three.js app</title>
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="https://cdn.skypack.dev/three/examples/jsm/loaders/GLTFLoader.js" type="module"></script>
+    <script>
+        
+        function send(data) {
+            // document.getElementById("data").innerHTML += "<br/>SEND:  " + JSON.stringify(data);
+            window.ReactNativeWebView.postMessage(JSON.stringify(data))
+        }
+        window.addEventListener("message", function (evt) {
+            var data = JSON.parse(evt.data);
+            document.getElementById("data").innerHTML += "<br/>" + JSON.stringify(data);
+            switch (data.component) {
+                case "init":
+                    init(data);
+                    break;
+            }
+            data.estado = "exito";
+            send(data);
+        });
+
+        function init(data) {
+            document.getElementById("data").innerHTML = JSON.stringify(data);
+        }
+
+
+    </script>
+
+    <div style="
+    z-index: 999;
+        position: fixed;
+        bottom: 10px;
+        left: 0;
+        background-color: #66666699;
+        height: 100px;
+        width: 100%;
+        color:#fff;
+        overflow: auto;
+       
+    ">
+        <div id="data">Console</div>
+    </div>
+
+    <script type="module">
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        var raycaster = new THREE.Raycaster();
+        var mouse = new THREE.Vector2();
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+
+        const cube = new THREE.Mesh(geometry, material);
+        
+        scene.add(cube);
+
+        camera.position.z = 5;
+        
+        // const loader = new GLTFLoader();
+
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+
+            renderer.render(scene, camera);
+        };
+
+        function randomBetween (min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1));
+        } 
+
+        animate();
+    </script>
+</body>
+
+</html>
