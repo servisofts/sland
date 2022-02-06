@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { SStorage } from 'servisofts-component';
-// import Services from './Services';
+import Services from './Services';
 
 const reducers = combineReducers({
-//    ...Services.Reducers
+    ...Services.Reducers
 });
 
 export default (state, action) => {
