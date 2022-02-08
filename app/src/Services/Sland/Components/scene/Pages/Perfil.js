@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SHr, SLoad, SNavigation, SPage, SText, SView } from 'servisofts-component';
 import Parent from ".."
+import scene_mesh from '../../scene_mesh';
 import SThree from '../../../../../SThree';
 class Perfil extends Component {
     constructor(props) {
@@ -16,7 +17,18 @@ class Perfil extends Component {
         if (!data) return <SLoad />
         return <SText>{JSON.stringify(data)}</SText>
     }
-
+    getThree() {
+        var scene_mesh_data = scene_mesh.Actions.getAllByKeyScene(this.key, this.props);
+        if (!scene_mesh_data) return <SLoad />
+        return <SThree meshes={scene_mesh_data.map((k) => {
+            return {
+                key: k.key_mesh,
+                position: k.position,
+                rotation: k.rotation,
+                scale: k.scale,
+            }
+        })} />
+    }
     render() {
         return (
             <SPage title={'Perfil'} disableScroll center>
@@ -24,7 +36,7 @@ class Perfil extends Component {
                 <SHr />
                 <SHr />
                 <SView col={"xs-10"} flex>
-                    <SThree />
+                    {this.getThree()}
                 </SView>
                 <SHr />
                 <SHr />

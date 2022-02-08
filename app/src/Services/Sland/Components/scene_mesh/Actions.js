@@ -24,6 +24,11 @@ export default class Actions {
         return data;
     }
 
+    static getAllByKeyScene = (key_scene, props) => {
+        var data = Actions.getAll(props);
+        if (!data) return null;
+        return Object.values(data).filter(item => item.key_scene == key_scene);
+    }
     static getByKey = (key, props) => {
         var data = Actions.getAll(props);
         if (!data) return null;

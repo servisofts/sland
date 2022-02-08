@@ -38,7 +38,7 @@ export default class Renderer {
         main.cssRenderer.setSize(width, height);
 
         main.renderer.outputEnconding = THREE.sRGBEncoding;
-        main.renderer.setClearColor(0x000000);
+        // main.renderer.setClearColor(0x000000);
 
         main.renderer.domElement.style.position = 'absolute';
         //main.renderer.domElement.style.pointerEvents = 'none';

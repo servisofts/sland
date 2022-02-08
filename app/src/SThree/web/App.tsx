@@ -44,7 +44,7 @@ export default class App extends Component<AppProps> {
     this.scene.add(this.scene);
     this.scene.add(new THREE.AmbientLight(0xffffff, 1));
     new Stats(this);
-    new Helpers(this);
+    // new Helpers(this);
     new Camera(this);
     this.props.meshes.map((mesh)=>{
       new SMesh(this, mesh);
