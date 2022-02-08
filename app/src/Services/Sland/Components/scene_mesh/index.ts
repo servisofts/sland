@@ -1,5 +1,5 @@
 //  COMPONENT CONFIG
-const component = "mesh"; // COMPONENT NAME 
+const component = "scene_mesh"; // COMPONENT NAME 
 const version = "1.0";
 // ---------------------------------------
 import Actions from "./Actions";
@@ -7,7 +7,6 @@ import Reducer from "./Reducer";
 
 import Lista from "./Pages/Lista";
 import Registro from "./Pages/Registro";
-import Perfil from "./Pages/Perfil";
 export default {
     component,
     version,
@@ -17,7 +16,6 @@ export default {
     },
     Pages: {
         [component]: Lista,
-        [component + "/registro"]: Registro,
-        [component + "/perfil"]: Perfil
+        [component + "/registro"]: Registro
     }
 }

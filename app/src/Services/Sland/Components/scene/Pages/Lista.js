@@ -35,14 +35,22 @@ class Lista extends Component {
                         </SView>
                     }
                 },
-                // {
-                //     key: "key-verMesh", label: "Ver", width: 70, center: true,
-                //     component: (key) => {
-                //         return <SView width={35} height={35} onPress={() => { SNavigation.navigate("mesh", { key_scene: key }) }}>
-                //             <SIcon name={'Salir'} />
-                //         </SView>
-                //     }
-                // },
+                {
+                    key: "key-verMesh", label: "Objetos", width: 70, center: true,
+                    component: (key) => {
+                        return <SView width={35} height={35} onPress={() => { SNavigation.navigate("scene_mesh", { key_scene: key }) }}>
+                            <SIcon name={'Ajustes'} />
+                        </SView>
+                    }
+                },
+                {
+                    key: "key-ver", label: "Ver", width: 70, center: true,
+                    component: (key) => {
+                        return <SView width={35} height={35} onPress={() => { SNavigation.navigate(Parent.component + "/perfil", { key: key }) }}>
+                            <SIcon name={'Salir'} />
+                        </SView>
+                    }
+                },
 
 
             ]}
@@ -56,7 +64,7 @@ class Lista extends Component {
 
     render() {
         return (
-            <SPage title={'Lista'} disableScroll>
+            <SPage title={'Lista de ' + Parent.component} disableScroll>
                 {this.getLista()}
                 <FloatButtom onPress={() => {
                     SNavigation.navigate(Parent.component + "/registro");

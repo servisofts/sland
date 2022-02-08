@@ -3,22 +3,31 @@ import { connect } from 'react-redux';
 import { SIcon, SLoad, SNavigation, SPage, SPopup, STable2, SText, SView } from 'servisofts-component';
 import Parent from ".."
 import FloatButtom from '../../../../../Component/FloatButtom';
+import mesh from '../../mesh';
 class Lista extends Component {
     constructor(props) {
         super(props);
         this.state = {
         };
-        // this.key_scene = SNavigation.getParam("key_scene");
+        this.key_scene = SNavigation.getParam("key_scene");
+        this.key_mesh = SNavigation.getParam("key_mesh");
     }
 
     getLista() {
         var data = Parent.Actions.getAll(this.props);
+        var meshData = mesh.Actions.getAll(this.props);
         if (!data) return <SLoad />
+        if (!meshData) return <SLoad />
+
         return <STable2
             header={[
                 { key: "index", label: "#", width: 50 },
-                { key: "descripcion", label: "Descripcion", width: 150 },
-                { key: "tipo", label: "Tipo", width: 100, center: true },
+                { key: "key_scene", label: "key_scene", width: 150 },
+                {
+                    key: "key_mesh", label: "key_mesh", width: 150, render: (item) => {
+                        return meshData[item]?.descripcion
+                    }
+                },
                 {
                     key: "key-editar", label: "Editar", width: 50, center: true,
                     component: (item) => {
@@ -37,18 +46,16 @@ class Lista extends Component {
                         </SView>
                     }
                 },
-                {
-                    key: "key-ver", label: "Ver", width: 50, center: true,
-                    component: (item) => {
-                        return <SView onPress={() => { SNavigation.navigate(Parent.component + "/perfil", { key: item }) }}>
-                            <SIcon name={"Salir"} width={35} />
-                        </SView>
-                    }
-                },
 
 
             ]}
             filter={(data) => {
+                if (this.key_scene) {
+                    if (data.key_scene != this.key_scene) return false;
+                }
+                if (this.key_mesh) {
+                    if (data.key_mesh != this.key_mesh) return false;
+                }
                 if (data.estado != 1) return false;
                 return true;
             }}
@@ -61,7 +68,7 @@ class Lista extends Component {
             <SPage title={'Lista de ' + Parent.component} disableScroll>
                 {this.getLista()}
                 <FloatButtom onPress={() => {
-                    SNavigation.navigate(Parent.component + "/registro");
+                    SNavigation.navigate(Parent.component + "/registro", { key_scene: this.key_scene, key_mesh: this.key_mesh });
                 }} />
             </SPage>
         );
