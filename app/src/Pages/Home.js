@@ -1,50 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SNavigation, SPage, SText, SThread, SView, STheme } from 'servisofts-component';
-import Pages from "../Pages/index";
+import { SButtom, SHr, SNavigation, SPage, SText, SView } from 'servisofts-component';
+
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            delay: 2500,
-
         };
     }
 
-
-
-    accesoModelo(url, size) {
-        return <SView
-            card
-            col={"xs-11 md-6"}
-            height={40}
-            style={{
-                padding: 8,
-            }}
-            onPress={() => { SNavigation.navigate(url) }}
-        >
-            <SText secondary style={{
-                marginStart: size*8,
-            }}>{url}</SText>
-        </SView>
+    getButtom(name) {
+        return <SButtom props={{
+            type: "danger"
+        }} onPress={() => {
+            SNavigation.navigate(name);
+        }}>{name}</SButtom>
     }
-    accesos() {
-        return Object.keys(Pages).map((key) => {
-            // if(key.indexOf("/") > 0) return null;
-            var spli = key.split("/");
-            if(key.indexOf("/") == 0 ) spli = [""] 
-            return <>
-                <SView height={8} />
-                {this.accesoModelo(key, spli.length-1)}
-            </>
-        })
-    }
-
     render() {
         return (
-            <SPage title={'Home'}>
-                <SView col={"xs-12"} center>
-                    {this.accesos()}
+            <SPage title={'Home'} hidden center>
+                <SHr />
+                <SText font={"Roboto"} fontSize={18}>{'Bienvenido a Servisofts Land'}</SText>
+                <SHr />
+                <SView row col={"xs-11"}>
+                    {this.getButtom('scene')}
+                    <SView width={8} />
+                    {this.getButtom('mesh')}
+                    <SView width={8} />
                 </SView>
             </SPage>
         );

@@ -33,14 +33,15 @@ const App = (props) => {
                 <SNavigation props={{
                     prefixes: ["https://component.servisofts.com", "component.servisofts://"],
                     pages: Pages,
+                    title: "S-Land"
                 }} />
-                {/* <SSocket identificarse={(props) => {
+                <SSocket identificarse={(props) => {
                     var usuario = props.state.usuarioReducer.usuarioLog;
                     return {
                         data: usuario ? usuario : {},
                         deviceKey: "as-asa-as",
                     }
-                }} /> */}
+                }} />
             </SComponentContainer>
         </Provider>
     )
