@@ -127,7 +127,7 @@ export default class SCannon {
         // this.cbody.position.y = this.mesh.position.y;
     }
     rotate(n) {
-        this.mesh.rotation.z += n;
+        this.mesh.rotateZ(n);
         this.cbody.quaternion.setFromEuler(this.mesh.rotation.x, this.mesh.rotation.y, this.mesh.rotation.z);
 
     }

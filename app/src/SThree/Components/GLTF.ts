@@ -1,7 +1,6 @@
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import * as THREE from "three";
-
 export default class GLTF {
     main;
     constructor(main) {
@@ -52,6 +51,15 @@ export default class GLTF {
 
         })
 
+    }
+    fetch(url) {
+        return new Promise<any>((resolve, reject) => {
+            fetch(url).then(response => response.json()).then(json => {
+                return resolve(json);
+            }).catch(error => {
+                return reject(error);
+            })
+        });
     }
     getGltfLoader() {
         if (!this.main.gltfLoader) {

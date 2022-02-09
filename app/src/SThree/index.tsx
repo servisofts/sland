@@ -14,11 +14,12 @@ export default class SThree extends Component<AppProps> {
     getApp() {
         if (!this.state.layout) return <SLoad />
         return <App
-            meshes={this.props.meshes}
             renderer={{
                 width: this.state.layout.width,
                 height: this.state.layout.height
-            }} />
+            }}
+            {...this.props}
+        />
     }
     render() {
         return <SView col={"xs-12"} height card onLayout={(evt) => {

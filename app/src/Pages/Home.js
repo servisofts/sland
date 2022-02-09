@@ -31,6 +31,8 @@ class Home extends Component {
                     <SView width={8} />
                     {this.getButtom('mesh')}
                     <SView width={8} />
+                    {this.getButtom('mesh_usuario')}
+                    <SView width={8} />
                 </SView>
             </SPage>
         );

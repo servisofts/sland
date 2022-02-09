@@ -4,6 +4,7 @@ import { SHr, SLoad, SNavigation, SPage, SText, SView } from 'servisofts-compone
 import Parent from ".."
 import scene_mesh from '../../scene_mesh';
 import SThree from '../../../../../SThree';
+import mesh_usuario from '../../mesh_usuario';
 class Perfil extends Component {
     constructor(props) {
         super(props);
@@ -19,12 +20,16 @@ class Perfil extends Component {
     }
     getThree() {
         var scene_mesh_data = scene_mesh.Actions.getAllByKeyScene(this.key, this.props);
+        var player = mesh_usuario.Actions.getMio(this.props);
         if (!scene_mesh_data) return <SLoad />
-        return <SThree meshes={scene_mesh_data.map((k) => {
-            return {
-                ...k,
-            }
-        })} />
+        if (!player) return <SLoad />
+        return <SThree
+            player={player}
+            meshes={scene_mesh_data.map((k) => {
+                return {
+                    ...k,
+                }
+            })} />
     }
     render() {
         return (

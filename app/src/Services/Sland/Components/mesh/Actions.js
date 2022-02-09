@@ -12,7 +12,7 @@ export default class Actions {
         if (!data) {
             if (reducer.estado == "cargando") return null;
             SSocket.send({
-                service: Service.ServiceName,
+
                 component: Parent.component,
                 version: Parent.version,
                 type: "getAll",
@@ -32,7 +32,7 @@ export default class Actions {
 
     static registro = (data, props) => {
         SSocket.send({
-            service: Service.ServiceName,
+
             component: Parent.component,
             version: Parent.version,
             type: "registro",
@@ -43,7 +43,7 @@ export default class Actions {
     }
     static editar = (data, props) => {
         SSocket.send({
-            service: Service.ServiceName,
+
             component: Parent.component,
             version: Parent.version,
             type: "editar",
@@ -54,7 +54,7 @@ export default class Actions {
     }
     static eliminar = (data, props) => {
         SSocket.send({
-            service: Service.ServiceName,
+
             component: Parent.component,
             version: Parent.version,
             type: "editar",

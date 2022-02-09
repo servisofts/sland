@@ -19,7 +19,7 @@ export default class SMesh {
     animations;
     mesh;
     props;
-    constructor(main, props: SMeshType) {
+    constructor(main, props: SMeshType, onLoad?) {
         this.props = props;
         this.main = main;
         let Instance = this;
@@ -27,6 +27,7 @@ export default class SMesh {
         this.getGltf(SSocket.api.root + "mesh/" + props.key_mesh).then(gltf => {
             new GLTF(main).parse(gltf).then(gltf => {
                 Instance.mesh = gltf.scene;
+                if (onLoad) onLoad(gltf);
                 gltf.scene.traverse(function (model) {
                     if (model.userData) {
                         Object.keys(model.userData).map((key) => {
@@ -66,13 +67,13 @@ export default class SMesh {
     }
 
     render() {
-        // if (this.mixer) {
-        //     this.mixer.update(this.main.DELTA);
-        // }
+        if (this.mixer) {
+            this.mixer.update(this.main.DELTA);
+        }
         if (this.mesh) {
-            this.mesh.position.set(this.props.position.x, this.props.position.y, this.props.position.z);
-            this.mesh.rotation.set(this.props.rotation.x, this.props.rotation.y, this.props.rotation.z);
-            this.mesh.scale.set(this.props.scale.x, this.props.scale.y, this.props.scale.z);
+            if (this.props.position) this.mesh.position.set(this.props.position.x, this.props.position.y, this.props.position.z);
+            if (this.props.rotation) this.mesh.rotation.set(this.props.rotation.x, this.props.rotation.y, this.props.rotation.z);
+            if (this.props.scale) this.mesh.scale.set(this.props.scale.x, this.props.scale.y, this.props.scale.z);
         }
 
     }

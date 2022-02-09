@@ -1,4 +1,5 @@
 import Component.Mesh;
+import Component.MeshUsuario;
 import Component.Notificacion;
 import Component.Scene;
 import Component.SceneMesh;
@@ -26,6 +27,9 @@ public class Manejador {
                 break;
             case SceneMesh.COMPONENT:
                 SceneMesh.onMessage(obj, session);
+                break;
+            case MeshUsuario.COMPONENT:
+                MeshUsuario.onMessage(obj, session);
                 break;
         }
     }

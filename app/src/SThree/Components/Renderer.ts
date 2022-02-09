@@ -27,8 +27,8 @@ export default class Renderer {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Windows Phone/i.test(navigator.userAgent)) {
             this.resizeRendererToDisplaySize(main.renderer);
         } else {
-            // main.renderer.setPixelRatio(window.devicePixelRatio);
-            main.renderer.setPixelRatio(0.8);
+            main.renderer.setPixelRatio(window.devicePixelRatio);
+            // main.renderer.setPixelRatio(0.8);
         }
 
         let width = this.props.width??window.innerWidth;

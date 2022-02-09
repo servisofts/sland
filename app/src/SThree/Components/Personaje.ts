@@ -8,6 +8,10 @@ import * as CANNON from 'cannon-es'
 import { SThread } from 'servisofts-component';
 import SCannon from "./SCannon";
 import SSocket from "servisofts-socket";
+import SMesh from "./SMesh";
+
+type PlayerAnimations = "Idle" | "Caminar"
+
 export default class Personaje {
     main;
     mixer;
@@ -17,13 +21,17 @@ export default class Personaje {
     mesh;
     COLLITION;
     OBJECT_IN_COLLITION = {};
+    SMeshPlayer;
+    player;
     props = {
         velocity: 1,
         speedRun: 2,
         jumpForce: 2,
     }
-    constructor(main) {
+
+    constructor(main, player?) {
         this.main = main;
+        this.player = player;
         this.mixer = new THREE.AnimationMixer(main.scene);
         new GLTF(main).parse(cotizacion).then(gltf => {
             this.personaje = main.scene.getObjectByName("Personaje");
@@ -33,6 +41,17 @@ export default class Personaje {
                 this.addPhysics(main);
             });
         });
+        if (player) {
+            console.log(player);
+            this.SMeshPlayer = new SMesh(main, {
+                position: { x: 0, y: 0, z: 0 },
+                rotation: { x: 0, y: 0, z: 0 },
+                scale: { x: 1, y: 1, z: 1 },
+                ...player
+            }, (gltf) => {
+                this.addAnimations(gltf);
+            });
+        }
 
         main.addToRender('Personaje', this);
         document.addEventListener('keydown', this.onKeyDown.bind(this), false);
@@ -63,8 +82,8 @@ export default class Personaje {
             // action.play();
             // }
         }
-        if (this.animations["Descanso"]) {
-            this.animations["Descanso"].play();
+        if (this.animations["Idle"]) {
+            this.animations["Idle"].play();
         }
     }
 
@@ -84,13 +103,13 @@ export default class Personaje {
             case 56: this.main.camera = this.main.CAMERAS[7] ?? this.main.camera; break;
             case 32:
                 // if (Object.keys(this.OBJECT_IN_COLLITION).length > 0) {
-                    // if (this.animations["Salto"]) {
-                    //     this.animations["Salto"].reset();
-                    //     this.animations["Salto"].play();
-                    // }
-                    // new SThread(1000, "jump", false).start(() => {
-                        this.cmesh.velocity(0, 0, this.props.jumpForce);
-                    // })
+                // if (this.animations["Salto"]) {
+                //     this.animations["Salto"].reset();
+                //     this.animations["Salto"].play();
+                // }
+                // new SThread(1000, "jump", false).start(() => {
+                this.cmesh.velocity(0, 0, this.props.jumpForce);
+                // })
                 // }
                 break;
         }
@@ -158,6 +177,9 @@ export default class Personaje {
         if (this.keystate[38] || this.keystate[87]) {
             if (this.animations["Caminar"]) {
                 this.animations["Caminar"].play();
+                if (this.animations["Idle"]) {
+                    this.animations["Idle"].stop();
+                }
             }
             this.cmesh.translateX(-this.props.velocity * delta * speed);
         } else
@@ -165,12 +187,20 @@ export default class Personaje {
                 // this.cmesh.velocity(1, 0, 0);
                 this.cmesh.translateX(this.props.velocity * delta * speed);
                 if (this.animations["Caminar"]) {
+
                     this.animations["Caminar"].play();
+                    if (this.animations["Idle"]) {
+                        this.animations["Idle"].stop();
+                    }
                 }
 
             } else {
                 if (this.animations["Caminar"]) {
+                    if (this.animations["Idle"]) {
+                        this.animations["Idle"].play();
+                    }
                     this.animations["Caminar"].stop();
+
                 }
             }
         if (this.keystate[37] || this.keystate[65]) {
@@ -181,6 +211,15 @@ export default class Personaje {
             // this.cmesh.velocity(0, 1, 0);
             this.cmesh.translateY(this.props.velocity * delta * speed);
         }
+        if (this.SMeshPlayer && this.personaje) {
+            this.SMeshPlayer.update({
+                position: this.personaje.position,
+                rotation: this.personaje.rotation,
+                scale: this.personaje.scale,
+                ...this.player
+            });
+        }
+
 
         this.checkCollition();
 

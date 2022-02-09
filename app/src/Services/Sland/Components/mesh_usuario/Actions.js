@@ -12,7 +12,6 @@ export default class Actions {
         if (!data) {
             if (reducer.estado == "cargando") return null;
             SSocket.send({
-              
                 component: Parent.component,
                 version: Parent.version,
                 type: "getAll",
@@ -34,10 +33,20 @@ export default class Actions {
         if (!data) return null;
         return data[key];
     }
+    static getByKeyUsuario = (key_usuario, props) => {
+        var data = Actions.getAll(props);
+        if (!data) return null;
+        return Object.values(data).filter(item => item.key_usuario_perfil == key_usuario);
+    }
+    static getMio = (props) => {
+        var data = Actions.getAll(props);
+        if (!data) return null;
+        var key_usuario = props.state.usuarioReducer.usuarioLog.key;
+        return Object.values(data).find(item => item.key_usuario_perfil == key_usuario);
+    }
 
     static registro = (data, props) => {
         SSocket.send({
-          
             component: Parent.component,
             version: Parent.version,
             type: "registro",
@@ -48,7 +57,6 @@ export default class Actions {
     }
     static editar = (data, props) => {
         SSocket.send({
-          
             component: Parent.component,
             version: Parent.version,
             type: "editar",
@@ -59,7 +67,6 @@ export default class Actions {
     }
     static eliminar = (data, props) => {
         SSocket.send({
-          
             component: Parent.component,
             version: Parent.version,
             type: "editar",

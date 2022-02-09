@@ -17,7 +17,8 @@ type RendererProps = {
 
 export type AppProps = {
   renderer?: RendererProps,
-  meshes: Array<SMeshType>;
+  meshes: Array<SMeshType>,
+  player?: Personaje,
 }
 export default class App extends Component<AppProps> {
 
@@ -44,7 +45,7 @@ export default class App extends Component<AppProps> {
     new Renderer(this);
     this.scene = new THREE.Scene();
     this.scene.add(this.scene);
-    this.scene.add(new THREE.AmbientLight(0xffffff, 1));
+    this.scene.add(new THREE.AmbientLight(0xffffff, 2));
     new Stats(this);
     this.world = new CANNON.World();
     this.world.gravity.set(0, 0, -9.82);
@@ -55,13 +56,19 @@ export default class App extends Component<AppProps> {
     // new Helpers(this);
     this.MESHES = {};
 
-    new Personaje(this);
+
+    this.loadPlayer();
 
     this.renderer.setAnimationLoop(this.animate.bind(this));
   }
 
   addToRender(name, instance) {
     this.ITEMS_TO_RENDER[name] = instance;
+  }
+
+  loadPlayer() {
+    if (!this.props.player) return;
+    new Personaje(this, this.props.player);
   }
 
   animate() {
