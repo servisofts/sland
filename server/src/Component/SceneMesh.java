@@ -7,6 +7,8 @@ import org.json.JSONObject;
 import Servisofts.SPGConect;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
+import Server.SSSAbstract.SSServerAbstract;
 import Server.SSSAbstract.SSSessionAbstract;
 
 public class SceneMesh {
@@ -62,6 +64,7 @@ public class SceneMesh {
             SPGConect.editObject(COMPONENT, data);
             obj.put("data", data);
             obj.put("estado", "exito");
+            SSServerAbstract.sendAllServer(obj.toString());
         } catch (Exception e) {
             obj.put("estado", "error");
             e.printStackTrace();

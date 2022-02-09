@@ -6,17 +6,18 @@ import Renderer from "../Components/Renderer";
 import Camera from "../Components/Camera";
 import Stats from "../Components/Stats";
 import Helpers from "../Components/Helpers";
-import SMesh from "../Components/SMesh";
+import SMesh, { SMeshType } from "../Components/SMesh";
+import Personaje from "../Components/Personaje";
+import SCannon from "../Components/SCannon";
+
 type RendererProps = {
   width: number,
   height: number,
 }
 
-type AppProps = {
+export type AppProps = {
   renderer?: RendererProps,
-  meshes: Array<{
-    key: string,
-  }>;
+  meshes: Array<SMeshType>;
 }
 export default class App extends Component<AppProps> {
 
@@ -28,9 +29,11 @@ export default class App extends Component<AppProps> {
 
   ITEMS_TO_RENDER = {};
   CAMERAS = [];
+  COLLITION = [];
+  MESHES;
 
   DELTA;
-
+  world;
   props: AppProps;
   constructor(props) {
     super(props);
@@ -39,16 +42,21 @@ export default class App extends Component<AppProps> {
 
   componentDidMount() {
     new Renderer(this);
-
     this.scene = new THREE.Scene();
     this.scene.add(this.scene);
     this.scene.add(new THREE.AmbientLight(0xffffff, 1));
     new Stats(this);
-    // new Helpers(this);
+    this.world = new CANNON.World();
+    this.world.gravity.set(0, 0, -9.82);
+    this.world.defaultContactMaterial.friction = 1;
+    this.world.broadphase = new CANNON.NaiveBroadphase();
+    this.world.iterations = 10;
     new Camera(this);
-    this.props.meshes.map((mesh)=>{
-      new SMesh(this, mesh);
-    })
+    // new Helpers(this);
+    this.MESHES = {};
+
+    new Personaje(this);
+
     this.renderer.setAnimationLoop(this.animate.bind(this));
   }
 
@@ -58,7 +66,9 @@ export default class App extends Component<AppProps> {
 
   animate() {
     this.DELTA = this.clock.getDelta();
-
+    if (this.world) {
+      this.world.step(this.DELTA);
+    }
     Object.keys(this.ITEMS_TO_RENDER).forEach(key => {
       this.ITEMS_TO_RENDER[key].render();
     })
@@ -68,6 +78,16 @@ export default class App extends Component<AppProps> {
   }
 
   render() {
+    console.log(this.props);
+    if (this.MESHES) {
+      this.props.meshes.map((mesh) => {
+        if (!this.MESHES[mesh.key]) {
+          this.MESHES[mesh.key] = new SMesh(this, mesh);
+        } else {
+          this.MESHES[mesh.key].update(mesh);
+        }
+      })
+    }
     return <><div id="three" />
       {/* <div
         id="loadingWindow"

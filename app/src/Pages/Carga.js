@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { SButtom, SHr, SIcon, SNavigation, SPage, SText, SThread, SView } from 'servisofts-component';
-// import SThree from '../SThree';
+import { SHr, SIcon, SNavigation, SPage, SThread, SView } from 'servisofts-component';
+import usuario from '../Services/Usuario/Components/usuario';
 
 class Carga extends Component {
     constructor(props) {
@@ -11,12 +11,29 @@ class Carga extends Component {
             delay: 2500,
         };
     }
+
+    redirect() {
+        if (!usuario.Actions.validateSession(this.props, true)) {
+            SNavigation.replace("login");
+        } else {
+            SNavigation.replace("/");
+        }
+    }
+    hilo() {
+        new SThread(this.state.delay, "cargaHilo", true).start(() => {
+            this.redirect();
+        });
+    }
     render() {
-        // this.hilo()
+        this.hilo()
         return (
-            <SPage hidden disableScroll center >
-                {/* <SText fontSize={24} bold>3D Render</SText> */}
-                {/* <SThree/> */}
+            <SPage hidden disableScroll center>
+                <SHr height={32} />
+                <SView col={"xs-9 sm-7 md-5 lg-4 xl-3"} height={200}>
+                    <SIcon name={"Logo"} />
+                </SView>
+                <SHr height={32} />
+
             </SPage>
         );
     }

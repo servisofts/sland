@@ -22,10 +22,7 @@ class Perfil extends Component {
         if (!scene_mesh_data) return <SLoad />
         return <SThree meshes={scene_mesh_data.map((k) => {
             return {
-                key: k.key_mesh,
-                position: k.position,
-                rotation: k.rotation,
-                scale: k.scale,
+                ...k,
             }
         })} />
     }

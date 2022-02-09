@@ -26,7 +26,7 @@ const SThemeProps: SThemeThemes = {
 const SocketProps = {
     name: 'sland',
 
-    host: '192.168.0.199',
+    host: '192.168.3.2',
     ssl: false,
 
     port: {

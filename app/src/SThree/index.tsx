@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
 import { SLoad, SView } from 'servisofts-component';
-import App from './web/App';
-
+import App, { AppProps } from './web/App';
 // Version: 1.3.3
-type SThreeProps = {
-    meshes: Array<{
-        key: string,
-        position?:{ x: number, y: number, z: number },
-        rotation?:{ x: number, y: number, z: number },
-        scale?:{ x: number, y: number, z: number },
-    }>;
-}
 
-export default class SThree extends Component<SThreeProps> {
+
+export default class SThree extends Component<AppProps> {
     state;
     constructor(props) {
         super(props);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SButtom, SHr, SNavigation, SPage, SText, SView } from 'servisofts-component';
-
+import { SButtom, SHr, SNavigation, SPage, SText, SView, SLoad } from 'servisofts-component';
+import usuario from '../Services/Usuario/Components/usuario';
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -17,6 +17,10 @@ class Home extends Component {
         }}>{name}</SButtom>
     }
     render() {
+
+        if (!usuario.Actions.validateSession(this.props)) {
+            return <SLoad />
+        }
         return (
             <SPage title={'Home'} hidden center>
                 <SHr />

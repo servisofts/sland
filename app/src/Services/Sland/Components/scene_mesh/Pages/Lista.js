@@ -22,7 +22,21 @@ class Lista extends Component {
         return <STable2
             header={[
                 { key: "index", label: "#", width: 50 },
-                { key: "key_scene", label: "key_scene", width: 150 },
+                {
+                    key: "position", label: "Position", width: 150, center: true, component: (item) => {
+                        return <SText>{JSON.stringify(item, "\n", "\t").replace(/\"|,/g, "")}</SText>
+                    }
+                },
+                {
+                    key: "rotation", label: "Rotation", width: 150, center: true, component: (item) => {
+                        return <SText>{JSON.stringify(item, "\n", "\t").replace(/\"|,/g, "")}</SText>
+                    }
+                },
+                {
+                    key: "scale", label: "Scale", width: 150, center: true, component: (item) => {
+                        return <SText>{JSON.stringify(item, "\n", "\t").replace(/\"|,/g, "")}</SText>
+                    }
+                },
                 {
                     key: "key_mesh", label: "key_mesh", width: 150, render: (item) => {
                         return meshData[item]?.descripcion

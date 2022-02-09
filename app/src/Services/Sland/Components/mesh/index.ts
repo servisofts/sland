@@ -8,6 +8,7 @@ import Reducer from "./Reducer";
 import Lista from "./Pages/Lista";
 import Registro from "./Pages/Registro";
 import Perfil from "./Pages/Perfil";
+import Select from "./Pages/Select";
 export default {
     component,
     version,
@@ -18,6 +19,7 @@ export default {
     Pages: {
         [component]: Lista,
         [component + "/registro"]: Registro,
-        [component + "/perfil"]: Perfil
+        [component + "/perfil"]: Perfil,
+        [component + "/select"]: Select
     }
 }

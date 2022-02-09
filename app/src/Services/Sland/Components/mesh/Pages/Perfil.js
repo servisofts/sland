@@ -20,6 +20,7 @@ class Perfil extends Component {
     getThree() {
         return <SThree meshes={[{
             key: this.key,
+            key_mesh: this.key,
         }]} />
     }
     render() {
