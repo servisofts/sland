@@ -1,0 +1,254 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.5.17",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "extras" : {
+                "glTF2ExportSettings" : {
+                    "export_cameras" : 1,
+                    "export_extras" : 1,
+                    "export_format" : "GLTF_EMBEDDED",
+                    "export_lights" : 1,
+                    "export_yup" : 0
+                }
+            },
+            "name" : "Scene",
+            "nodes" : [
+                4
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "camera" : 0,
+            "name" : "Camera.002",
+            "rotation" : [
+                0.3396683633327484,
+                0.33969584107398987,
+                0.61989426612854,
+                0.6204540133476257
+            ],
+            "translation" : [
+                13.42454719543457,
+                0,
+                12.35170841217041
+            ]
+        },
+        {
+            "camera" : 1,
+            "name" : "CameraFrontal",
+            "rotation" : [
+                0.5,
+                -0.5000001192092896,
+                -0.49999988079071045,
+                0.5
+            ],
+            "translation" : [
+                -17.15086555480957,
+                5.588461590377847e-06,
+                1.8030941486358643
+            ]
+        },
+        {
+            "camera" : 2,
+            "name" : "CamMedia",
+            "rotation" : [
+                0.4438324272632599,
+                0.4438324272632599,
+                0.550466001033783,
+                0.5504659414291382
+            ],
+            "translation" : [
+                11.855573654174805,
+                0.890418291091919,
+                5.517070293426514
+            ]
+        },
+        {
+            "camera" : 3,
+            "name" : "PrimerPersona",
+            "rotation" : [
+                0.468227356672287,
+                0.4682273864746094,
+                0.5298709273338318,
+                0.529870867729187
+            ],
+            "scale" : [
+                1,
+                0.6142024993896484,
+                1
+            ],
+            "translation" : [
+                10.22522258758545,
+                0,
+                4.210100173950195
+            ]
+        },
+        {
+            "children" : [
+                0,
+                1,
+                2,
+                3
+            ],
+            "mesh" : 0,
+            "name" : "Personaje",
+            "rotation" : [
+                0,
+                0,
+                1,
+                -1.6292068494294654e-07
+            ],
+            "scale" : [
+                0.5,
+                0.5,
+                0.5
+            ]
+        }
+    ],
+    "cameras" : [
+        {
+            "name" : "Camera",
+            "perspective" : {
+                "aspectRatio" : 1.7777777777777777,
+                "yfov" : 0.4426288715029911,
+                "zfar" : 1000,
+                "znear" : 0.10000000149011612
+            },
+            "type" : "perspective"
+        },
+        {
+            "name" : "Camera.003",
+            "perspective" : {
+                "aspectRatio" : 1.7777777777777777,
+                "yfov" : 0.39959648408210363,
+                "zfar" : 1000,
+                "znear" : 7.299999713897705
+            },
+            "type" : "perspective"
+        },
+        {
+            "extras" : {
+                "defaultCamera" : 1
+            },
+            "name" : "Camera.001",
+            "perspective" : {
+                "aspectRatio" : 1.7777777777777777,
+                "yfov" : 0.46635962087574345,
+                "zfar" : 1000,
+                "znear" : 2.999999761581421
+            },
+            "type" : "perspective"
+        },
+        {
+            "name" : "Camera.002",
+            "perspective" : {
+                "aspectRatio" : 1.7777777777777777,
+                "yfov" : 0.438165040726198,
+                "zfar" : 1000,
+                "znear" : 0.10000000149011612
+            },
+            "type" : "perspective"
+        }
+    ],
+    "materials" : [
+        {
+            "alphaMode" : "BLEND",
+            "doubleSided" : true,
+            "name" : "Z",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    1,
+                    0,
+                    0.02170649729669094,
+                    0.6470588445663452
+                ],
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.39705878496170044
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Cube.001",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 24,
+            "max" : [
+                0.3895057439804077,
+                0.3895057439804077,
+                0.7890101671218872
+            ],
+            "min" : [
+                -0.3895057439804077,
+                -0.3895057439804077,
+                0.009998679161071777
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 24,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 24,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 36,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 288,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 288,
+            "byteOffset" : 288
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 192,
+            "byteOffset" : 576
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 72,
+            "byteOffset" : 768
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 840,
+            "uri" : "data:application/octet-stream;base64,TG3Hvkxtx76A0SM8TG3Hvkxtx76A0SM8TG3Hvkxtx76A0SM8TG3Hvkxtx76S/Ek/TG3Hvkxtx76S/Ek/TG3Hvkxtx76S/Ek/TG3Hvkxtxz6A0SM8TG3Hvkxtxz6A0SM8TG3Hvkxtxz6A0SM8TG3Hvkxtxz6S/Ek/TG3Hvkxtxz6S/Ek/TG3Hvkxtxz6S/Ek/TG3HPkxtx76A0SM8TG3HPkxtx76A0SM8TG3HPkxtx76A0SM8TG3HPkxtx76S/Ek/TG3HPkxtx76S/Ek/TG3HPkxtx76S/Ek/TG3HPkxtxz6A0SM8TG3HPkxtxz6A0SM8TG3HPkxtxz6A0SM8TG3HPkxtxz6S/Ek/TG3HPkxtxz6S/Ek/TG3HPkxtxz6S/Ek/AACAvwAAAAAAAAAAAAAAAAAAgL8AAAAAAAAAAAAAAAAAAIC/AACAvwAAAAAAAAAAAAAAAAAAgL8AAAAAAAAAAAAAAAAAAIA/AACAvwAAAAAAAAAAAAAAAAAAAAAAAIC/AAAAAAAAgD8AAAAAAACAvwAAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAAAAAAIC/AACAPwAAAAAAAAAAAAAAAAAAgL8AAAAAAAAAAAAAAAAAAIA/AACAPwAAAAAAAAAAAAAAAAAAAAAAAIC/AAAAAAAAgD8AAAAAAACAPwAAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAAAAAADAPgAAgD8AAMA+AAAAAAAAAD4AAIA+AAAgPwAAgD8AACA/AAAAAAAAYD8AAIA+AADAPgAAQD8AAAA+AAAAPwAAwD4AAEA/AAAgPwAAQD8AAGA/AAAAPwAAID8AAEA/AADAPgAAgD4AAMA+AACAPgAAwD4AAIA+AAAgPwAAgD4AACA/AACAPgAAID8AAIA+AADAPgAAAD8AAMA+AAAAPwAAwD4AAAA/AAAgPwAAAD8AACA/AAAAPwAAID8AAAA/AAADAAkAAAAJAAYACAALABYACAAWABMAFAAXABEAFAARAA4ADAAPAAQADAAEAAEABwASAA0ABwANAAIAFQAKAAUAFQAFABAA"
+        }
+    ]
+}

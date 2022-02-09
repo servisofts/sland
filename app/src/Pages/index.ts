@@ -1,7 +1,10 @@
 import { SPageListProps } from 'servisofts-component'
+import Services from '../Services';
+
+
 import Carga from './Carga';
 import Home from './Home';
-import Services from '../Services';
+
 const Pages: SPageListProps = {
     "/": Home,
     "carga": Carga,

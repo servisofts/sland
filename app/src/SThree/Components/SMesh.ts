@@ -4,25 +4,55 @@ import * as THREE from "three";
 
 import GLTF from "./GLTF";
 import SSocket from "servisofts-socket";
+import SCannon from './SCannon';
 export type SMeshType = {
     key: string,
+    key_mesh: string,
+    position?: { x: number, y: number, z: number },
+    rotation?: { x: number, y: number, z: number },
+    scale?: { x: number, y: number, z: number },
 }
+
 export default class SMesh {
     main;
     mixer;
     animations;
+    mesh;
+    props;
     constructor(main, props: SMeshType) {
+        this.props = props;
         this.main = main;
         let Instance = this;
 
-        this.getGltf(SSocket.api.root + "mesh/" + props.key).then(gltf => {
+        this.getGltf(SSocket.api.root + "mesh/" + props.key_mesh).then(gltf => {
             new GLTF(main).parse(gltf).then(gltf => {
-
+                Instance.mesh = gltf.scene;
+                gltf.scene.traverse(function (model) {
+                    if (model.userData) {
+                        Object.keys(model.userData).map((key) => {
+                            switch (key) {
+                                case 'mass':
+                                    var type: any = "Box";
+                                    if (model.userData["pType"]) {
+                                        type = model.userData["pType"];
+                                    }
+                                    new SCannon(Instance.main, {
+                                        mesh: model,
+                                        type: type,
+                                        mass: model.userData[key],
+                                    });
+                                    break;
+                            }
+                        })
+                    }
+                })
             });
+
         })
-
-
         main.addToRender(props.key, this);
+    }
+    update(props: SMeshType) {
+        this.props = props;
     }
 
     getGltf(url) {
@@ -39,6 +69,11 @@ export default class SMesh {
         // if (this.mixer) {
         //     this.mixer.update(this.main.DELTA);
         // }
+        if (this.mesh) {
+            this.mesh.position.set(this.props.position.x, this.props.position.y, this.props.position.z);
+            this.mesh.rotation.set(this.props.rotation.x, this.props.rotation.y, this.props.rotation.z);
+            this.mesh.scale.set(this.props.scale.x, this.props.scale.y, this.props.scale.z);
+        }
 
     }
 }

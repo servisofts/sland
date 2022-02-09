@@ -14,7 +14,7 @@ export default class Camera {
         this.main = main;
         main.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
         main.addToRender('Camera', this);
-        main.camera.position.set(5, 5, 5);
+        main.camera.position.set(20,10, 20);
         // main.camera.rotation.x = ;
         // main.camera.rotation.z -=0.1
         main.camera.lookAt(0, 0, 0);

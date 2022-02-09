@@ -30,12 +30,14 @@ class Registro extends Component {
             inputs={{
                 foto_p: { type: "file", isRequired: false, col: "xs-4 sm-3.5 md-3 lg-2.5 xl-2.5"},
                 descripcion: { label: "Descripcion", isRequired: true, defaultValue: this.data["descripcion"] },
-                url: { label: "url", isRequired: true, defaultValue: this.data["url"] },
+                // url: { label: "url", isRequired: true, defaultValue: this.data["url"] },
                 tipo: {
                     label: "Tipo", isRequired: true, defaultValue: this.data["tipo"], type: "select", options: [
                         { key: "", content: "Vacio" },
                         { key: "plane", content: "Plane" },
                         { key: "mesh", content: "Mesh" },
+                        { key: "Player", content: "player" },
+
                     ]
                 },
             }}
