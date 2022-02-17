@@ -212,10 +212,12 @@ export default class Personaje {
             this.cmesh.translateY(this.props.velocity * delta * speed);
         }
         if (this.SMeshPlayer && this.personaje) {
+            let position = this.personaje.position.clone();
+            position.z = this.personaje.position.z - 0.5;
             this.SMeshPlayer.update({
-                position: this.personaje.position,
+                position: position,
                 rotation: this.personaje.rotation,
-                scale: this.personaje.scale,
+                // scale: this.personaje.scale,
                 ...this.player
             });
         }

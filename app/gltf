@@ -1,0 +1,2 @@
+#!/bin/bash
+cp /u01/blender/blend/${1}.gltf ./src/Assets/3d/${1}.json

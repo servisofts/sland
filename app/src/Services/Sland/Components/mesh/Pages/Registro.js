@@ -28,7 +28,7 @@ class Registro extends Component {
                 customStyle: "calistenia"
             }}
             inputs={{
-                foto_p: { type: "file", isRequired: false, col: "xs-4 sm-3.5 md-3 lg-2.5 xl-2.5"},
+                foto_p: { type: "file", isRequired: false, col: "xs-4 sm-3.5 md-3 lg-2.5 xl-2.5" },
                 descripcion: { label: "Descripcion", isRequired: true, defaultValue: this.data["descripcion"] },
                 // url: { label: "url", isRequired: true, defaultValue: this.data["url"] },
                 tipo: {

@@ -45,7 +45,7 @@ export default class App extends Component<AppProps> {
     new Renderer(this);
     this.scene = new THREE.Scene();
     this.scene.add(this.scene);
-    this.scene.add(new THREE.AmbientLight(0xffffff, 2));
+    // this.scene.add(new THREE.AmbientLight(0xffffff, 0.4));
     new Stats(this);
     this.world = new CANNON.World();
     this.world.gravity.set(0, 0, -9.82);
